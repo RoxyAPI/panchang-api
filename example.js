@@ -8,14 +8,14 @@ import { createRoxy } from '@roxyapi/sdk';
 
 const roxy = createRoxy(process.env.ROXY_API_KEY);
 
-// Always geocode first. Example: roxy.location.searchCities({ query: { q: 'New Delhi' } })
+// Step 1: geocode the city - never hardcode coordinates
+const { data: loc, error: locErr } = await roxy.location.searchCities({ query: { q: 'New Delhi' } });
+if (locErr) throw new Error(locErr.error);
+const { latitude, longitude, timezone } = loc.cities[0];
+
+// Step 2: detailed panchang for that location
 const { data, error } = await roxy.vedicAstrology.getDetailedPanchang({
-  body: {
-    date: '2026-05-03',
-    latitude: 28.6139,   // New Delhi
-    longitude: 77.209,
-    timezone: 5.5,       // IST
-  },
+  body: { date: '2026-05-03', latitude, longitude, timezone },
 });
 
 if (error) {

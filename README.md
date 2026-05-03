@@ -1,4 +1,4 @@
-![Panchang API](banner.png)
+[![Panchang API](banner.png)](https://roxyapi.com/products/vedic-astrology-api)
 
 # Panchang API
 
@@ -36,10 +36,15 @@ The Panchang API returns a complete Hindu calendar (panchang) for any date and o
 ### cURL
 
 ```bash
+# Step 1: geocode the city
+curl -s "https://roxyapi.com/api/v2/location/search?q=New+Delhi" \
+  -H "X-API-Key: $ROXY_API_KEY"
+
+# Step 2: detailed panchang using coordinates from step 1
 curl -X POST https://roxyapi.com/api/v2/vedic-astrology/panchang/detailed \
   -H "X-API-Key: $ROXY_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"date":"2026-05-03","latitude":28.6139,"longitude":77.209,"timezone":5.5}'
+  -d '{"date":"2026-05-03","latitude":28.6139,"longitude":77.209,"timezone":"Asia/Kolkata"}'
 ```
 
 ### Python
@@ -50,12 +55,14 @@ from roxy_sdk import create_roxy
 
 roxy = create_roxy(os.environ["ROXY_API_KEY"])
 
-# Always geocode first: roxy.location.search_cities(q="New Delhi")
+# Step 1: geocode the city - never hardcode coordinates
+loc = roxy.location.search_cities(q="New Delhi")
+city = loc["cities"][0]
+latitude, longitude, timezone = city["latitude"], city["longitude"], city["timezone"]
+
+# Step 2: detailed panchang for that location
 panchang = roxy.vedic_astrology.get_detailed_panchang(
-    date="2026-05-03",
-    latitude=28.6139,
-    longitude=77.209,
-    timezone=5.5,
+    date="2026-05-03", latitude=latitude, longitude=longitude, timezone=timezone,
 )
 tithi = panchang["tithi"]
 print(tithi["name"], tithi["paksha"], "paksha")
@@ -69,9 +76,13 @@ import { createRoxy } from '@roxyapi/sdk';
 
 const roxy = createRoxy(process.env.ROXY_API_KEY);
 
-// Always geocode first: roxy.location.searchCities({ query: { q: 'New Delhi' } })
+// Step 1: geocode the city - never hardcode coordinates
+const { data: loc } = await roxy.location.searchCities({ query: { q: 'New Delhi' } });
+const { latitude, longitude, timezone } = loc.cities[0];
+
+// Step 2: detailed panchang for that location
 const { data } = await roxy.vedicAstrology.getDetailedPanchang({
-  body: { date: '2026-05-03', latitude: 28.6139, longitude: 77.209, timezone: 5.5 },
+  body: { date: '2026-05-03', latitude, longitude, timezone },
 });
 console.log(data.tithi.name, data.tithi.paksha, 'paksha');
 console.log('Rahu Kaal:', data.rahuKaal.start, 'to', data.rahuKaal.end);
@@ -84,9 +95,13 @@ import { createRoxy } from '@roxyapi/sdk';
 
 const roxy = createRoxy(process.env.ROXY_API_KEY!);
 
-// Always geocode first: roxy.location.searchCities({ query: { q: 'New Delhi' } })
+// Step 1: geocode the city - never hardcode coordinates
+const { data: loc } = await roxy.location.searchCities({ query: { q: 'New Delhi' } });
+const { latitude, longitude, timezone } = loc!.cities[0];
+
+// Step 2: detailed panchang for that location
 const { data } = await roxy.vedicAstrology.getDetailedPanchang({
-  body: { date: '2026-05-03', latitude: 28.6139, longitude: 77.209, timezone: 5.5 },
+  body: { date: '2026-05-03', latitude, longitude, timezone },
 });
 console.log(data?.tithi.name, data?.tithi.paksha, 'paksha');
 console.log('Rahu Kaal:', data?.rahuKaal.start, 'to', data?.rahuKaal.end);

@@ -9,12 +9,17 @@ from roxy_sdk import create_roxy
 
 roxy = create_roxy(os.environ["ROXY_API_KEY"])
 
-# Always geocode first. Example: roxy.location.search_cities(q="New Delhi")
+# Step 1: geocode the city - never hardcode coordinates
+loc = roxy.location.search_cities(q="New Delhi")
+city = loc["cities"][0]
+latitude, longitude, timezone = city["latitude"], city["longitude"], city["timezone"]
+
+# Step 2: detailed panchang for that location
 panchang = roxy.vedic_astrology.get_detailed_panchang(
     date="2026-05-03",
-    latitude=28.6139,   # New Delhi
-    longitude=77.209,
-    timezone=5.5,       # IST
+    latitude=latitude,
+    longitude=longitude,
+    timezone=timezone,
 )
 
 print("Date:", panchang["date"])
