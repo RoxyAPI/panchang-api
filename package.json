@@ -1,0 +1,15 @@
+{
+  "name": "panchang-api",
+  "version": "0.1.0",
+  "type": "module",
+  "private": false,
+  "description": "Panchang API. Tithi, nakshatra, yoga, karana plus 15 muhurtas including rahu kaal, abhijit",
+  "license": "MIT",
+  "dependencies": {
+    "@roxyapi/sdk": "^1.2.21"
+  },
+  "scripts": {
+    "ts": "bun example.ts",
+    "js": "node example.js"
+  }
+}
