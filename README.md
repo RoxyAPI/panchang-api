@@ -13,13 +13,13 @@
 
 ## What is Panchang API
 
-The Panchang API returns a complete Hindu calendar (panchang) for any date and observer location. One call delivers all five limbs: Tithi (lunar day), Nakshatra (lunar mansion), Yoga, Karana, and Vara. It then adds sunrise, sunset, moonrise, moonset, Rahu Kaal, Yamaganda, Gulika Kaal, Abhijit Muhurta, Brahma Muhurta, Chandrabalam, Tarabalam, Varjyam, and Amrit Kalam. Powered by Roxy Ephemeris, verified against NASA JPL Horizons, and available through 10 spiritual domains in one subscription. The Remote MCP server at `https://roxyapi.com/mcp/vedic-astrology` makes the panchang API instantly usable in Claude, Cursor, or any MCP-compatible agent.
+The Panchang API returns a complete Hindu calendar (panchang) for any date and observer location. One call delivers all five limbs: Tithi (lunar day), Nakshatra (lunar mansion), Yoga, Karana, and Vara. It then adds sunrise, sunset, moonrise, moonset, Rahu Kaal, Yamaganda, Gulika Kaal, Abhijit Muhurta, Brahma Muhurta, Chandrabalam, Tarabalam, Varjyam, and Amrit Kalam. Powered by Roxy Ephemeris, verified against NASA JPL Horizons, and available through 12 spiritual domains in one subscription. The Remote MCP server at `https://roxyapi.com/mcp/vedic-astrology` makes the panchang API instantly usable in Claude, Cursor, or any MCP-compatible agent.
 
 ## Why this API
 
 | Property | Value |
 |----------|-------|
-| Coverage | 10 spiritual domains in one subscription |
+| Coverage | 12 spiritual domains in one subscription |
 | Calculation | Roxy Ephemeris, verified against NASA JPL Horizons |
 | MCP server | `https://roxyapi.com/mcp/vedic-astrology` (Streamable HTTP, no local setup) |
 | SDKs | TypeScript on npm `@roxyapi/sdk`, Python on PyPI `roxy-sdk` |

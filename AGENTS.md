@@ -6,7 +6,7 @@ This repo teaches AI coding agents (Cursor, Claude Code, Aider, Codex, Windsurf,
 - Method: `POST`
 - URL: `https://roxyapi.com/api/v2/vedic-astrology/panchang/detailed`
 - Auth: `X-API-Key` header
-- Domain: `vedic-astrology` (one of 10 in the RoxyAPI catalog)
+- Domain: `vedic-astrology` (one of 12 in the RoxyAPI catalog)
 - Operation ID: `getDetailedPanchang` matches the SDK method name in camelCase
 - MCP tool: `post_vedic_astrology_panchang_detailed` on `https://roxyapi.com/mcp/vedic-astrology`
 
